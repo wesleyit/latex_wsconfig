@@ -1,0 +1,187 @@
+% =====================================================================
+% This file's purpose is to organize dependencies, package load and
+% document configuration outside the main file, which will isolate
+% LaTeX code from content text. There are sections here by each
+% plugin and config function. You can comment packages and configs
+% if they are not necessary in your LaTeX document.
+% Please, be aware that this section is invoked on the PREAMBLE,
+% right after the document class.
+
+% =====================================================================
+% This section defines settings related to the document pages 
+% like margins and spaces.
+
+\usepackage{fetchcls}  % Allow decisions based on class name
+\usepackage{ifthen}  % Allow decisions based on conditions
+\usepackage{afterpage}  % Allow other packages to apply logic by page
+\usepackage{geometry}  % This package allows selecting margins size
+\usepackage{setspace}  % Allows selecting line spacing
+\usepackage{indentfirst}  % Indents each first paragraph
+
+% Margins sizes:
+\geometry{
+    left=3cm,
+    top=3cm,
+    right=3cm,
+    bottom=3cm,
+}
+
+% The indentation and between-paragraphs spacing sizes:
+\setlength{\parindent}{1.30cm}  % Indent size
+\setlength{\parskip}{0.2cm}  % Space between paragraphs
+
+% Select one of the following line spacing options. If the
+% class is ABNTEX2, then ignore this setting:
+\ifthenelse{\equal{\classname}{abntex2}}
+{   
+    % for abntex2 class:
+    % \SingleSpacing
+    % \DoubleSpacing
+    % \OnehalfSpacing  % (default)
+}
+{
+    % for other document classes:
+    % \singlespacing
+    % \doublespacing
+    \onehalfspacing
+}
+
+% =====================================================================
+% This section is dedicated to graphical elements, like formulas
+% and images. The packages here helps to configure those visual
+% elements.
+
+% American Mathematical Society packages:
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+% Insert puctures, make drawings and plots:
+\usepackage{pagecolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+% Save your images here:
+\graphicspath{ {./images/} }
+
+% Use and create colors definitions:
+\usepackage{xcolor}
+
+% This will define colors that can be used as a theme:
+\definecolor{fgcolor}{HTML}{112233}
+\definecolor{bgcolor}{HTML}{FFFFFF}
+\definecolor{c1color}{HTML}{336699}
+\definecolor{c2color}{HTML}{99CCFF}
+\definecolor{c3color}{HTML}{CC9900}
+
+% =====================================================================
+% This section defines text and font related tweaks.
+
+\usepackage{lipsum}  % For generating dummy text
+\usepackage{url}  % For parsing URLs and creating links
+\usepackage[utf8]{inputenc}  % For typing directly special chars
+\usepackage[T1]{fontenc}  % For typing directly special chars
+\usepackage{microtype}  % For better text alinment
+\usepackage{nomencl}  % For creating a symbols list
+\usepackage{csquotes}  % For easier text quoting
+\usepackage{lmodern}  % Latin Modern font
+\usepackage{siunitx}  % A better way of writing things with units
+
+% =====================================================================
+% This section configures the behavior for references, cites, etc.
+% For this configuration the package BibLatex (with Biber backend)
+% has been selected. The references will be included in a single
+% file called "references.bib".
+
+% Select the proper citation style:
+% \usepackage[backend=biber,backref=true,style=numeric]{biblatex}
+% \usepackage[backend=biber,backref=true,style=authoryear]{biblatex}
+% \usepackage[backend=biber,backref=true,style=alphabetic]{biblatex}
+% \usepackage[backend=biber,backref=true,style=ieee]{biblatex}
+% \usepackage[backend=biber,backref=true,style=science]{biblatex}
+% \usepackage[backend=biber,backref=true,style=abnt]{biblatex}
+\usepackage[backend=biber,backref=true,style=abnt-numeric]{biblatex}
+
+% The file with bibliographic references:
+\addbibresource{references.bib}  % <-- Include your references on this file!
+
+% This package creates links (internal and external) in your
+% final PDF file, connected to your references:
+\usepackage{hyperref}
+
+% This will create links to references and URLs
+% and also display in which page a reference is cited.
+% Customize the language according to your needs:
+\DefineBibliographyStrings{brazilian}{
+    backrefpage={Citado na página },
+    backrefpages={Citado nas páginas }
+}
+
+% The default links colors are ugly, this way is better.
+% Also, let's set some options to create a good PDF file:
+\makeatletter
+\hypersetup{
+    colorlinks=true,
+    linkcolor=c1color,
+    filecolor=c1color,
+    citecolor=c1color,
+    urlcolor=c1color,
+}
+
+% =====================================================================
+% This section configures the abnlatex2 package. It is valid only
+% when the documentclass is {abntex2}.
+
+\ifthenelse{\equal{\classname}{abntex2}} {%
+    \renewcommand{\maketitlehookb}{}
+    \makeatother
+    \makeindex
+    \checkandfixthelayout
+}{}
+
+% =====================================================================
+% This section defines some packages for beautiful details, like fancy
+% headers, footers, chapters and boxes.
+
+% Enable Fancy Headers (requires aditional configuration),
+% and then use the commands \fancyhead and \fancyfoot:
+\usepackage{fancyhdr}  % Fancy headers
+
+% Enable Fancy Chapters on report class. Select one style:
+% Sonny, Lenny, Glenn, Conny, Rejne, and Bjarne.
+\ifthenelse{\equal{\classname}{report}}
+{\usepackage[Sonny]{fncychap}} 
+{}  % Does not work well on memoir, abntex2 and some other classes.
+
+
+% and then use the commands \fancyhead and \fancyfoot:
+\usepackage{fancyhdr}  % Fancy headers
+
+% This enables \fbox, \shadowbox, \doublebox, \ovalbox and \Ovalbox:
+\usepackage{fancybox}
+
+% For better code syntax highlighting, use listings. For example,
+% a frame with code in Python with line numbers can be done with
+% \begin{lstlisting}[frame=single,language=Python, numbers=left]
+% It can be used with tcolorbox for creating amazing colorful boxes:
+\usepackage{listings}
+\usepackage{tcolorbox}
+
+% These packages help to improve the tables building:
+\usepackage{array}  % Offers more flexible column formatting
+\usepackage{booktabs}  % Supports professional looking tables
+\usepackage{tabularx}  % Columns that expands to fill
+\usepackage{multirow}  % Lets tabular material span multiple rows
+\usepackage{array}  % Provides tabulars that can split across pages
+
+% =====================================================================
+% This section defines code that will run right after \begin{document}.
+
+\AtBeginDocument{
+    \color{fgcolor}
+    \pagecolor{bgcolor}
+}
+
+% =====================================================================
