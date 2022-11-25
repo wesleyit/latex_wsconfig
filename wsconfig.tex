@@ -33,7 +33,7 @@
 % Select one of the following line spacing options. If the
 % class is ABNTEX2, then ignore this setting:
 \ifthenelse{\equal{\classname}{abntex2}}
-{   
+{
     % for abntex2 class:
     % \SingleSpacing
     % \DoubleSpacing
@@ -57,7 +57,6 @@
 \usepackage{amsthm}
 
 % Insert puctures, make drawings and plots:
-\usepackage{pagecolor}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -75,6 +74,10 @@
 \definecolor{c1color}{HTML}{336699}
 \definecolor{c2color}{HTML}{99CCFF}
 \definecolor{c3color}{HTML}{CC9900}
+
+% Finally, allow changing the page color.
+% This package must be loaded after xcolor:
+\usepackage{pagecolor}
 
 % =====================================================================
 % This section defines text and font related tweaks.
@@ -152,15 +155,17 @@
 % Enable Fancy Chapters on report class. Select one style:
 % Sonny, Lenny, Glenn, Conny, Rejne, and Bjarne.
 \ifthenelse{\equal{\classname}{report}}
-{\usepackage[Sonny]{fncychap}} 
+{\usepackage[Sonny]{fncychap}}
 {}  % Does not work well on memoir, abntex2 and some other classes.
-
-
-% and then use the commands \fancyhead and \fancyfoot:
-\usepackage{fancyhdr}  % Fancy headers
 
 % This enables \fbox, \shadowbox, \doublebox, \ovalbox and \Ovalbox:
 \usepackage{fancybox}
+
+% This package allows one to write poems and epigraphs easily like
+% \epigraph{``Begin at the beginning, the King said gravely,
+% and go on till you come to the end: then stop.''}
+% {---Lewis Carroll, \textit{Alice in Wonderland}}
+\usepackage{epigraph}
 
 % For better code syntax highlighting, use listings. For example,
 % a frame with code in Python with line numbers can be done with
@@ -175,6 +180,14 @@
 \usepackage{tabularx}  % Columns that expands to fill
 \usepackage{multirow}  % Lets tabular material span multiple rows
 \usepackage{array}  % Provides tabulars that can split across pages
+
+% =====================================================================
+% This section defines something that seems to be very brute and needs
+% to be used wisely... some packages have well-known warnings that may
+% disturb you. They can be ignored here.
+
+\usepackage{silence}
+\WarningsOff[biblatex]
 
 % =====================================================================
 % This section defines code that will run right after \begin{document}.

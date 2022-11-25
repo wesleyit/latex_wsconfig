@@ -1,24 +1,44 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage{wsconfig}
+\input{wsconfig.tex}  % This loads the magic package =)
 
-\title{Hello World!}
-\author{Your Name}
+\title{
+    LaTeX Example Document: \\
+    \large{How to create a nice paper} \\
+}
+
+\author{
+     \small{Person One \textit{<personone@somemail.com>}} \\
+     \small{Person Two \textit{<persontwo@somemail.com>}} \\
+     \small{Last Person \textit{<lastperson@somemail.com>}} \\
+}
+
 \date{November 2022}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-    \lipsum[1]
+    This is a very simple document, intended to serve as a starting
+    point for those who want to create a LaTeX paper. As a simple article,
+    you can just replace the sections you plan to use, delete the
+    ones you wont, and configure the settings and references as
+    you wish.
 
     \vspace{1em}
     \noindent\textbf{Keywords:} LaTeX, Simple, Template
 \end{abstract}
 
 \section{Introduction}
-Hello, world! This is a very simple document for beginners.
-Enjoy it!
+Hello, world! This is a very simple document for beginners. It will not
+contain many different structures and resources, as it is intended
+to be simple, but you can search for further examples on the Internet. For example,
+the LaTeX Manual for Authors \cite{LaTeX2020} contains plenty of good tips.
 
-\lipsum[1-5]
+With LaTeX it is easy to cite articles, like this one written by \textcite{SomeAuthor2022},
+or even a book, like this \cite{Genius1801}. Try changing some options in the configuration
+file and check out the results. Happy writting!
+
+\newpage
+\printbibliography[heading=bibnumbered,title=References]
 
 \end{document}
