@@ -7,16 +7,36 @@
 % Please, be aware that this section is invoked on the PREAMBLE,
 % right after the document class.
 
+% This document contains code only, not text content:
+% spell-checker: disable
+
 % =====================================================================
 % This section defines settings related to the document pages 
 % like margins and spaces.
 
+\usepackage{microtype}  % For better text alignment
 \usepackage{fetchcls}  % Allow decisions based on class name
 \usepackage{ifthen}  % Allow decisions based on conditions
 \usepackage{afterpage}  % Allow other packages to apply logic by page
 \usepackage{geometry}  % This package allows selecting margins size
 \usepackage{setspace}  % Allows selecting line spacing
 \usepackage{indentfirst}  % Indents each first paragraph
+
+% Select one of the following line spacing options. If the
+% class is ABNTEX2, then ignore this setting:
+\ifthenelse{\equal{\classname}{abntex2}}
+{
+    % for abntex2 class:
+    % \SingleSpacing
+    % \DoubleSpacing
+    \OnehalfSpacing  % (default)
+}
+{
+    % for other document classes:
+    % \singlespacing
+    % \doublespacing
+    % \onehalfspacing
+}
 
 % Margins sizes:
 \geometry{
@@ -27,23 +47,13 @@
 }
 
 % The indentation and between-paragraphs spacing sizes:
-\setlength{\parindent}{1.30cm}  % Indent size
-\setlength{\parskip}{0.2cm}  % Space between paragraphs
+\setlength{\parindent}{1.25cm}  % Indent size
 
-% Select one of the following line spacing options. If the
-% class is ABNTEX2, then ignore this setting:
-\ifthenelse{\equal{\classname}{abntex2}}
-{
-    % for abntex2 class:
-    % \SingleSpacing
-    % \DoubleSpacing
-    % \OnehalfSpacing  % (default)
-}
-{
-    % for other document classes:
-    % \singlespacing
-    % \doublespacing
-    \onehalfspacing
+% Space between paragraphs:
+\setlength\parskip{
+    .5\baselineskip
+    plus .1\baselineskip
+    minus .4\baselineskip
 }
 
 % =====================================================================
@@ -56,7 +66,15 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 
-% Insert puctures, make drawings and plots:
+% To have acronyms and glossaries working:
+\usepackage[printonlyused]{acronym}
+% \renewcommand*\acffont{\textit}  % change the style of long acms
+% \renewcommand*\acsfont{\textit}  % change the style of short acms
+
+% Use and create colors definitions (with tables support):
+\usepackage[table,xcdraw]{xcolor}
+
+% Insert pictures, make drawings and plots:
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -65,11 +83,8 @@
 % Save your images here:
 \graphicspath{ {./images/} }
 
-% Use and create colors definitions:
-\usepackage{xcolor}
-
 % This will define colors that can be used as a theme:
-\definecolor{fgcolor}{HTML}{112233}
+\definecolor{fgcolor}{HTML}{000000}
 \definecolor{bgcolor}{HTML}{FFFFFF}
 \definecolor{c1color}{HTML}{336699}
 \definecolor{c2color}{HTML}{99CCFF}
@@ -77,16 +92,17 @@
 
 % Finally, allow changing the page color.
 % This package must be loaded after xcolor:
-\usepackage{pagecolor}
+% \usepackage{pagecolor}  % problems with abntex2
 
 % =====================================================================
 % This section defines text and font related tweaks.
 
-\usepackage{lipsum}  % For generating dummy text
-\usepackage{url}  % For parsing URLs and creating links
+% Comment if using lualatex:
 \usepackage[utf8]{inputenc}  % For typing directly special chars
 \usepackage[T1]{fontenc}  % For typing directly special chars
-\usepackage{microtype}  % For better text alinment
+
+\usepackage{lipsum}  % For generating dummy text
+\usepackage{url}  % For parsing URLs and creating links
 \usepackage{nomencl}  % For creating a symbols list
 \usepackage{csquotes}  % For easier text quoting
 \usepackage{lmodern}  % Latin Modern font
@@ -94,7 +110,7 @@
 
 % =====================================================================
 % This section configures the behavior for references, cites, etc.
-% For this configuration the package BibLatex (with Biber backend)
+% For this configuration the package BibLatex (with Biber back-end)
 % has been selected. The references will be included in a single
 % file called "references.bib".
 
@@ -134,8 +150,8 @@
 }
 
 % =====================================================================
-% This section configures the abnlatex2 package. It is valid only
-% when the documentclass is {abntex2}.
+% This section configures the abntex2 package. It is valid only
+% when the document class is {abntex2}.
 
 \ifthenelse{\equal{\classname}{abntex2}} {%
     \renewcommand{\maketitlehookb}{}
@@ -148,7 +164,7 @@
 % This section defines some packages for beautiful details, like fancy
 % headers, footers, chapters and boxes.
 
-% Enable Fancy Headers (requires aditional configuration),
+% Enable Fancy Headers (requires additional configuration),
 % and then use the commands \fancyhead and \fancyfoot:
 \usepackage{fancyhdr}  % Fancy headers
 
@@ -179,7 +195,7 @@
 \usepackage{booktabs}  % Supports professional looking tables
 \usepackage{tabularx}  % Columns that expands to fill
 \usepackage{multirow}  % Lets tabular material span multiple rows
-\usepackage{array}  % Provides tabulars that can split across pages
+\usepackage{array}  % Provides tabular that can split across pages
 
 % =====================================================================
 % This section defines something that seems to be very brute and needs
@@ -190,11 +206,18 @@
 \WarningsOff[biblatex]
 
 % =====================================================================
+% This section defines Custom Commands, for leaving the main TEX file
+% clean and simple, at least for the preamble instructions.
+
+% \renewcommand{\chaptername}{Capítulo}
+% \renewcommand{\contentsname}{Sumário}
+
+% =====================================================================
 % This section defines code that will run right after \begin{document}.
 
 \AtBeginDocument{
     \color{fgcolor}
-    \pagecolor{bgcolor}
+    % \pagecolor{bgcolor}
 }
 
 % =====================================================================

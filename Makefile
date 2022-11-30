@@ -7,7 +7,9 @@ delete_aux_files:
 	./*.fls ./*.log ./*.run.xml \
 	./*.synctex.gz ./*.tex.bbl ./*.tex.blg \
 	./*.toc ./*.bbl ./*.blg ./*.out \
-	./*.idx ./*.ilg ./*.ind
+	./*.idx ./*.ilg ./*.ind ./*.acn \
+	./*.glo ./*.glsdefs ./*.ist \
+	./*.vrb ./*.snm ./*.nav
 
 delete_pdf:
 	@echo "Deleting the PDF file..."

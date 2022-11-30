@@ -28,6 +28,11 @@
     \noindent\textbf{Keywords:} LaTeX, Simple, Template
 \end{abstract}
 
+\section*{Acronyms}
+\begin{acronym}[ICANN]
+    \input{acronyms.tex}  % <== This loads a separate list of acronyms
+\end{acronym}
+
 \section{Introduction}
 Hello, world! This is a very simple document for beginners. It will not
 contain many different structures and resources, as it is intended
@@ -36,7 +41,8 @@ the LaTeX Manual for Authors \cite{LaTeX2020} contains plenty of good tips.
 
 With LaTeX it is easy to cite articles, like this one written by \textcite{SomeAuthor2022},
 or even a book, like this \cite{Genius1801}. Try changing some options in the configuration
-file and check out the results. Happy writting!
+file and check out the results. Also, acronyms like \ac{i3e} and \ac{smart} are an easy task.
+Happy writing!
 
 \newpage
 \printbibliography[heading=bibnumbered,title=References]
